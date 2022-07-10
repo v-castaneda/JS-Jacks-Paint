@@ -2,19 +2,30 @@ function configureListeners() {
   // select img elements
   let images = document.querySelectorAll("img");
 
-  for (var i = 0; i < images.length; i++) {
+  for (let i = 0; i < images.length; i++) {
     // iterate over images and add mouseover event listeners
-    images[i].addEventListener("mouseover", addOpacity);
+    document
+      .getElementById(images[i].id)
+      .addEventListener("mouseover", addOpacity, false);
+    document
+      .getElementById(images[i].id)
+      .addEventListener("mouseout", removeOpacity, false);
   }
 }
 
 function addOpacity(event) {
   // add appropriate CSS class
+  if (!this.classList.contains("dim")) {
+    this.classList.add("dim");
+  }
   getProductInfo(event.target.id);
 }
 
 function removeOpacity(event) {
   //remove appropriate CSS class
+  if (this.classList.contains("dim")) {
+    this.classList.remove("dim");
+  }
 
   let element = document.getElementById("color-price");
   element.textContent = "";
@@ -57,31 +68,31 @@ function getProductInfo(paintColor) {
     case "pn5":
       // set variables for price and color name and invoke a function to update the price
       price = "21.98";
-      color = "Solid White";
+      colorName = "Solid White";
       updatePrice(colorName, price);
       break;
     case "pn6":
       // set variables for price and color name and invoke a function to update the price
       price = "$4.99";
-      color = "Solid Black";
+      colorName = "Solid Black";
       updatePrice(colorName, price);
       break;
     case "pn7":
       // set variables for price and color name and invoke a function to update the price
       price = "$8.22";
-      color = "Solid Cyan";
+      colorName = "Solid Cyan";
       updatePrice(colorName, price);
       break;
     case "pn8":
       // set variables for price and color name and invoke a function to update the price
       price = "$11.99";
-      color = "Solid Purple";
+      colorName = "Solid Purple";
       updatePrice(colorName, price);
       break;
     case "pn9":
       // set variables for price and color name and invoke a function to update the price
       price = "$14.99";
-      color = "Solid Yellow";
+      colorName = "Solid Yellow";
       updatePrice(colorName, price);
       break;
     default:
